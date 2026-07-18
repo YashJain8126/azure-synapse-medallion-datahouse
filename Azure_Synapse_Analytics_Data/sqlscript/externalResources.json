@@ -1,0 +1,17 @@
+{
+	"name": "externalResources",
+	"properties": {
+		"content": {
+			"query": "--Database Scoped Credential\nCREATE DATABASE SCOPED CREDENTIAL yashCreds\nWITH IDENTITY = 'Managed Identity'\n\n--External Data Source \nCREATE EXTERNAL DATA SOURCE silver_source\nWITH(\n    LOCATION = 'https://synapsdwhlake.dfs.core.windows.net/silver/',\n    CREDENTIAL = yashCreds\n)\n\nCREATE EXTERNAL DATA SOURCE gold_source\nWITH(\n    LOCATION = 'https://synapsdwhlake.dfs.core.windows.net/gold/',\n    CREDENTIAL = yashCreds\n)\n\n--External File Format\nCREATE EXTERNAL FILE FORMAT parquet_format\nWITH (\n    FORMAT_TYPE = PARQUET,\n    DATA_COMPRESSION = 'org.apache.hadoop.io.compress.SnappyCodec'\n)\n\n\nCREATE EXTERNAL FILE FORMAT delta\nWITH (\n    FORMAT_TYPE = DELTA\n)",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "salesDWH",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

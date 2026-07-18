@@ -1,0 +1,17 @@
+{
+	"name": "sampleSQLFor100TopRpws",
+	"properties": {
+		"content": {
+			"query": "-- This is auto-generated code\nSELECT\n    TOP 100 *\nFROM\n    OPENROWSET(\n        BULK 'enrichedSales',\n        DATA_SOURCE = 'silver_source',\n        FORMAT = 'PARQUET'\n    ) AS [result]\n\nSELECT * FROM silver.silverTable\n\n\nSELECT * FROM \nOPENROWSET\n(\n    BULK 'enrichedSales',\n    DATA_SOURCE = 'silver_source',\n    FORMAT = 'PARQUET'\n) \nWITH\n(\n    ORDER_ID VARCHAR(100) 1\n)as q3",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "salesDWH",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

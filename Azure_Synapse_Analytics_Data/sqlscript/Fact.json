@@ -1,0 +1,17 @@
+{
+	"name": "Fact",
+	"properties": {
+		"content": {
+			"query": "IF NOT EXISTS(SELECT * FROM sys.tables t JOIN sys.schemas s ON t.schema_id = s.schema_id \nWHERE t.name = 'FactOrders' AND s.name = 'gold')\n    CREATE EXTERNAL TABLE gold.FactOrders\n    WITH (\n        LOCATION = 'FactOrders',\n        DATA_SOURCE = gold_source,\n        FILE_FORMAT = parquet_format\n    )\n    AS\n    SELECT \n        o.DimOrdersKey,\n        c.DimCustomerKey,\n        p.DimProductKey,\n        g.DimGeographyKey,\n        f.Quantity,\n        f.UnitPrice,\n        f.TotalAmount\n    FROM \n        silver.silverTable f\n    LEFT JOIN\n        gold.DimOrders o ON f.OrderID = o.OrderID\n    LEFT JOIN \n        gold.DimCustomer c ON f.CustomerID = c.CustomerID\n    LEFT JOIN\n        gold.DimProduct p ON f.ProductID = p.ProductID\n    LEFT JOIN \n        gold.DimGeography g ON f.RegionID = g.RegionID AND f.Country = g.Country\n\n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "salesDWH",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
