@@ -1,0 +1,33 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"workspaceName": {
+			"value": "adminyash"
+		},
+		"LS_ServerLessPool_password": {
+			"value": ""
+		},
+		"adminyash-WorkspaceDefaultSqlServer_connectionString": {
+			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=tcp:adminyash.sql.azuresynapse.net,1433;Initial Catalog=@{linkedService().DBName}"
+		},
+		"ExtLake_properties_typeProperties_url": {
+			"value": "https://synapsdwhlake.dfs.core.windows.net/"
+		},
+		"LS_Datalake_properties_typeProperties_url": {
+			"value": "https://synapsdwhlake.dfs.core.windows.net/"
+		},
+		"LS_ServerLessPool_properties_typeProperties_server": {
+			"value": "adminyash-ondemand.sql.azuresynapse.net"
+		},
+		"LS_ServerLessPool_properties_typeProperties_database": {
+			"value": "salesDWH"
+		},
+		"LS_ServerLessPool_properties_typeProperties_userName": {
+			"value": "adminyash"
+		},
+		"adminyash-WorkspaceDefaultStorage_properties_typeProperties_url": {
+			"value": "https://manageddatalakesynaps.dfs.core.windows.net"
+		}
+	}
+}
